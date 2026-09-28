@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Base Converter</title>
+
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #141e30, #243b55);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 600px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 32px;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #cbd5e1;
+        margin-bottom: 30px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 13px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    input:focus, select:focus {
+        box-shadow: 0 0 0 3px rgba(100, 180, 255, 0.4);
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        background: #3b82f6;
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #2563eb;
+        transform: translateY(-2px);
+    }
+
+    .results {
+        margin-top: 25px;
+    }
+
+    .result-box {
+        background: rgba(0, 0, 0, 0.25);
+        padding: 15px;
+        margin-top: 10px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .result-box span:first-child {
+        font-weight: bold;
+        color: #93c5fd;
+    }
+
+    .result {
+        font-family: monospace;
+        font-size: 17px;
+    }
+
+    .error {
+        color: #fca5a5;
+        text-align: center;
+        margin-top: 15px;
+    }
+</style>
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Number Base Converter</h1>
+
+    <p class="subtitle">
+        Convert numbers between different number systems
+    </p>
+
+    <label for="number">Enter a number</label>
+    <input type="text" id="number" placeholder="Example: 1010">
+
+    <label for="base">Input Base</label>
+    <select id="base">
+        <option value="2">Binary (Base 2)</option>
+        <option value="8">Octal (Base 8)</option>
+        <option value="10" selected>Decimal (Base 10)</option>
+        <option value="16">Hexadecimal (Base 16)</option>
+    </select>
+
+    <button onclick="convertNumber()">Convert</button>
+
+    <div class="error" id="error"></div>
+
+    <div class="results">
+
+        <div class="result-box">
+            <span>Binary</span>
+            <span class="result" id="binary">—</span>
+        </div>
+
+        <div class="result-box">
+            <span>Octal</span>
+            <span class="result" id="octal">—</span>
+        </div>
+
+        <div class="result-box">
+            <span>Decimal</span>
+            <span class="result" id="decimal">—</span>
+        </div>
+
+        <div class="result-box">
+            <span>Hexadecimal</span>
+            <span class="result" id="hexadecimal">—</span>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    function convertNumber() {
+
+        const input = document.getElementById("number").value.trim();
+        const base = parseInt(document.getElementById("base").value);
+        const error = document.getElementById("error");
+
+        // Clear previous error
+        error.textContent = "";
+
+        if (input === "") {
+            error.textContent = "Please enter a number.";
+            return;
+        }
+
+        // Convert input to decimal
+        const decimal = parseInt(input, base);
+
+        // Check if the input is valid
+        if (isNaN(decimal)) {
+            error.textContent = "Invalid number for the selected base.";
+            return;
+        }
+
+        // Display conversions
+        document.getElementById("binary").textContent =
+            decimal.toString(2);
+
+        document.getElementById("octal").textContent =
+            decimal.toString(8);
+
+        document.getElementById("decimal").textContent =
+            decimal.toString(10);
+
+        document.getElementById("hexadecimal").textContent =
+            decimal.toString(16).toUpperCase();
+    }
+</script>
+
+</body>
+</html>
