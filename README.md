@@ -1,5 +1,5 @@
 How to Use
-  1. Open index.html in a web browser.
+  1. Open number base converter.html in a web browser.
   2. Enter a number in the input field.
   3. Select the number's current base.
   4. Click Convert.
